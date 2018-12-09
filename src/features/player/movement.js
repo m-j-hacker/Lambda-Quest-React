@@ -1,12 +1,25 @@
 import store from '../../config/store'
+import { SPRITE_SIZE } from '../../config/constants'
 
 export default function handleMovement(player) {
 
     function getNewPosition(direction) {
-        return [ oldPos[0]-, oldPos[1] ]
+        const oldPos = store.getState().player.position
+        switch(direction) {
+            case 'WEST':
+                return [ oldPos[0]-SPRITE_SIZE, oldPos[1] ]
+            case 'EAST':
+                return [ oldPos[0]+SPRITE_SIZE, oldPos[1] ]
+            case 'NORTH':
+                return [ oldPos[0], oldPos[1]-SPRITE_SIZE ]
+            case 'SOUTH':
+                return [ oldPos[0], oldPos[1]+SPRITE_SIZE ]
+        }
+        
     }
 
     function dispatchMove(direction) {
+        
         store.dispatch({
             type: 'MOVE_PLAYER',
             payload: {
@@ -20,16 +33,16 @@ export default function handleMovement(player) {
 
         switch(e.keyCode) {
             case 37:
-                return console.log('WEST')
+                return dispatchMove('WEST')
             
             case 38:
-                return console.log('NORTH')
+                return dispatchMove('NORTH')
 
             case 39:
-                return console.log('EAST')
+                return dispatchMove('EAST')
 
             case 40:
-                return console.log('SOUTH')
+                return dispatchMove('SOUTH')
             default:
             console.log(e.keyCode)
         }
