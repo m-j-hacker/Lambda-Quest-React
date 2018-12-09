@@ -5,7 +5,10 @@ import Player from './features/player';
 class App extends Component {
   render() {
     return (
-      <Player />
+      <div>
+        <Map />
+        <Player />
+      </div>
     );
   }
 }
