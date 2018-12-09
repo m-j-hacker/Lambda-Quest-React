@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { SPRITE_SIZE } from '../../config/constants'
 
 import './styles.css'
@@ -62,4 +63,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default Map
+export default connect(mapStateToProps)(Map)
