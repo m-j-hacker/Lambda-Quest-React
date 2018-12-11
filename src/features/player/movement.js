@@ -19,12 +19,33 @@ export default function handleMovement(player) {
         
     }
 
+    function getSpriteLocation(direction, walkIndex) {
+        switch(direction) {
+            case 'WEST':
+                return `${SPRITE_SIZE*walkIndex}px ${SPRITE_SIZE*2}px`
+            case 'EAST':
+                return `${SPRITE_SIZE*walkIndex}px ${SPRITE_SIZE*1}px`
+            case 'NORTH':
+                return `${SPRITE_SIZE*walkIndex}px ${SPRITE_SIZE*3}px`
+            case 'SOUTH':
+                return `${SPRITE_SIZE*walkIndex}px ${SPRITE_SIZE*0}px`
+        }
+    }
+
     function observeImpassable(oldPos, newPos) {
         const tiles = store.getState().map.tiles
         const y = newPos[1] / SPRITE_SIZE
         const x = newPos[0] / SPRITE_SIZE
         const nextTile = tiles[y][x]
         return nextTile < 5
+    }
+
+    function getWalkIndex() {
+        // This functions gets walkIndex from state and prevents
+        // walkIndex from going above 7 - this limitation is due to
+        // the sprite templates and their move animations
+        const walkIndex = store.getState().player.walkIndex
+        return walkIndex >= 7 ? 0 : walkIndex + 1
     }
 
     function observeBoundaries(oldPos, newPos) {
@@ -34,12 +55,15 @@ export default function handleMovement(player) {
                (newPos[1] >= 0 && newPos[1] <= MAP_HEIGHT - SPRITE_SIZE)
     }
 
-    function dispatchMove(newPos) {
-        
+    function dispatchMove(direction, newPos) {
+        const walkIndex = getWalkIndex()
         store.dispatch({
             type: 'MOVE_PLAYER',
             payload: {
-                position: newPos
+                position: newPos,
+                direction,
+                walkIndex,
+                spriteLocation: getSpriteLocation(direction, walkIndex),
             }
         })
     }
@@ -49,7 +73,7 @@ export default function handleMovement(player) {
         const newPos = getNewPosition(oldPos, direction)
 
         if(observeBoundaries(oldPos, newPos) && observeImpassable(oldPos, newPos)) {
-            dispatchMove(newPos)
+            dispatchMove(direction, newPos)
         }
     }
 
