@@ -3,6 +3,14 @@
     background-color: #42b842;
 }
 
+.grass {
+
+}
+
+.chest {
+    background-image: url('/tiles/chest.png')
+}
+
 .rock {
     background-image: url('/tiles/rock.png')
 }
