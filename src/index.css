@@ -1,12 +1,12 @@
 /* Original body styling */
-/* body {
+body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   background-color: black;
-} */
+}
 
-body {
+/* body {
   width: 100vw;
   height: 100vh;
   margin: 0;
@@ -45,4 +45,4 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 10px;
-}
+} */
