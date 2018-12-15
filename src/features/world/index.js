@@ -20,7 +20,7 @@ function World(props) {
                 margin: '20px auto',
             }}
         >
-            <Sound url={'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Swimmey%20Texture.mp3'} autoLoad={true} playStatus={Sound.status.PLAYING} />
+            <Sound url={'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Swimmey%20Texture.mp3'} autoLoad={true} playStatus={Sound.status.PLAYING} position={0} />
             <Map />
             <Player />
         </div>
